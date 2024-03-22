@@ -4,9 +4,11 @@
     {
         static void Main(string[] args)
         {
-           
 
 
+           var board =  Board.InitGrid();
+
+            Board.ShowBoard(board);
 
 
 
