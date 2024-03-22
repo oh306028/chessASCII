@@ -13,5 +13,10 @@ namespace consoleGame
 
         public char Symbol { get; set; }
 
+        public int XPosition { get; set; }
+        public int YPosition { get; set; }
+
+        public AttackService AttackService { get; }
+
     }
 }

@@ -8,17 +8,22 @@ using System.Threading.Tasks;
 
 namespace consoleGame.Pieces
 {
-    public class WhitePawn : Piece
+    public class WhitePawn : IPiece
     {
 
         public WhitePawn(int xPos, int yPos)
         {
-            Symbol = 'P';
             XPosition = xPos;
             YPosition = yPos;
         }
 
-        public override bool CanMove(MoveService move, char[,] board)
+        public char Symbol { get; set; } = 'P';
+        public int XPosition { get; set; }
+        public int YPosition { get; set; }
+        public AttackService AttackService { get; } = new AttackService();
+     
+
+        public bool CanMove(MoveService move, char[,] board)
         {
            
 
