@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace consoleGame.Pieces
 {
-    public abstract class Piece : IPiece
+    public class Piece : IPiece
     {
-        abstract public bool CanMove(char[,] board);
+        virtual public bool CanMove(MoveService move, char[,] board)
+        {
+            return false;
+        }
 
+        public AttackService AttackService { get; set; } = new AttackService();
         public int XPosition { get; set; }
         public int YPosition { get; set; }
- 
+        public char Symbol { get; set; }
 
     }
 }

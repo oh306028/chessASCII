@@ -9,9 +9,9 @@ namespace consoleGame
 {
     public interface IPiece
     {
-        bool CanMove(char[,] board);
+        bool CanMove(MoveService move, char[,] board);   
 
-
+        public char Symbol { get; set; }
 
     }
 }

@@ -8,8 +8,15 @@ namespace consoleGame.Services
 {
     public class AttackService
     {
-        public bool CanAttack()
+
+        public bool CanAttack(MoveService move)    
         {
+
+
+            
+
+
+
             return false;
         }
 
