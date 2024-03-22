@@ -7,8 +7,11 @@
 
 
            var board =  Board.InitGrid();
-
             Board.ShowBoard(board);
+
+
+
+
 
 
 

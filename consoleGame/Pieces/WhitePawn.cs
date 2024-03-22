@@ -20,22 +20,29 @@ namespace consoleGame.Pieces
 
         public override bool CanMove(MoveService move, char[,] board)
         {
-
            
 
-
-            if (board[move.XMove, move.YMove] != ' ')
+            if (board[move.XMove,move.YMove] != ' ')
             {
-                if (AttackService.CanAttack(move))
-                    return true;
-                    
-
+                if (!AttackService.CanAttack(move))
+                    return false;
+                
+                if(XPosition - 1 == move.XMove && (YPosition + 1 == move.YMove || YPosition - 1 == move.YMove))
+                     return true;
 
             }
 
-            // moving
+
+            if (move.XMove == XPosition)
+                return false;
 
 
+            if (XPosition == 7 && move.XMove == 5)
+                return true;
+
+
+            if (XPosition - 1 == move.XMove)
+                return true;
 
 
 
