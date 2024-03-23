@@ -17,10 +17,11 @@ namespace consoleGame.Pieces
             YPosition = yPos;
         }
 
+        public bool DoubleMoved { get; set; } = false; 
         public char Symbol { get; set; } = 'P';
         public int XPosition { get; set; }
         public int YPosition { get; set; }
-        public AttackService AttackService { get; } = new AttackService();
+        public AttackService AttackService { get; } = new AttackService('P');
      
 
         public bool CanMove(MoveService move, char[,] board)
@@ -29,7 +30,7 @@ namespace consoleGame.Pieces
 
             if (board[move.XMove,move.YMove] != ' ')
             {
-                if (!AttackService.CanAttack(move))
+                if (!AttackService.CanAttack(move,board))
                     return false;
                 
                 if(XPosition - 1 == move.XMove && (YPosition + 1 == move.YMove || YPosition - 1 == move.YMove))
@@ -42,11 +43,23 @@ namespace consoleGame.Pieces
                 return false;
 
 
-            if (XPosition == 7 && move.XMove == 5)
+            if (XPosition == 7 && move.XMove == 5 && YPosition == move.YMove)
+            {
+                if (board[XPosition-1,YPosition] == ' ')
+                {
+                    DoubleMoved = true;
+                    return true;
+                }
+             
+            }
+              
+
+
+            if (XPosition - 1 == move.XMove && (YPosition + 1 == move.YMove || YPosition - 1 == move.YMove) && board[move.XMove, move.YMove] != ' ')
                 return true;
 
 
-            if (XPosition - 1 == move.XMove)
+            if (XPosition - 1 == move.XMove && YPosition == move.YMove)
                 return true;
 
 
