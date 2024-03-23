@@ -13,7 +13,7 @@ namespace consoleGame.Pieces
         public int XPosition { get; set ; }
         public int YPosition { get; set ; }
 
-        public AttackService AttackService { get; } = new AttackService('B');
+        public virtual AttackService AttackService { get; } = new AttackService('B');
 
         public WhiteBishop(int x, int y)
         {
