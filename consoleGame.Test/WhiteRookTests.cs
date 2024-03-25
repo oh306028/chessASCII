@@ -142,5 +142,41 @@ namespace consoleGame.Test
 
         }
 
+
+        [Theory]
+        [InlineData(3, 2)]
+        [InlineData(2, 4)]
+        [InlineData(6, 1)]
+        [InlineData(5, 3)]
+        [InlineData(7, 5)]
+        [InlineData(7, 2)]
+
+        public void WhiteRook_ForInValidMoves_ReturnFalse2(int x, int y)
+        {
+            //init
+                
+            var board = Board.InitGrid();
+            board[5, 3] = 'R';
+
+            board[2, 4] = ' ';
+            board[7, 5] = ' ';
+            board[7, 2] = ' ';
+
+
+            var pawn = new WhiteRook(5, 3); 
+            var move = new MoveService(x, y);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
+
     }
 }
