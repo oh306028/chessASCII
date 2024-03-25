@@ -43,7 +43,7 @@ namespace consoleGame.Pieces
 
                 do
                 {
-                    if (board[x, y] != ' ' && !AttackService.CanAttack(move, board))
+                    if (board[x, y] != ' ' && (x != move.XMove && y != move.YMove))
                         return false;
 
 
@@ -63,7 +63,7 @@ namespace consoleGame.Pieces
 
                 do
                 {
-                    if (board[x, y] != ' ' && !AttackService.CanAttack(move, board))
+                    if (board[x, y] != ' ' && (x != move.XMove && y != move.YMove))
                         return false;
 
 
@@ -84,7 +84,7 @@ namespace consoleGame.Pieces
 
                 do
                 {
-                    if (board[x, y] != ' ' && !AttackService.CanAttack(move, board))
+                    if (board[x, y] != ' ' && (x != move.XMove && y != move.YMove))
                         return false;
 
 
@@ -103,9 +103,8 @@ namespace consoleGame.Pieces
 
                 do
                 {
-                    if (board[x, y] != ' ' && !AttackService.CanAttack(move, board))
+                    if (board[x, y] != ' ' && (x != move.XMove && y != move.YMove))
                         return false;
-
 
                     x++;
                     y--;
