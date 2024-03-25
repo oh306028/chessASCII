@@ -123,7 +123,7 @@ namespace consoleGame.Pieces
 
             }
 
-
+            
 
             return false;
         }

@@ -36,7 +36,7 @@ namespace consoleGame.Pieces
             }
 
 
-            if(move.XMove < XPosition && move.YMove > YPosition)
+            if (move.XMove < XPosition && move.YMove > YPosition)
             {
                 int x = XPosition - 1;
                 int y = YPosition + 1;
@@ -52,9 +52,10 @@ namespace consoleGame.Pieces
 
                 } while (x > move.XMove && y < move.YMove);
 
+                return true;
             }
-
-
+            
+                
             if (move.XMove > XPosition && move.YMove > YPosition)
             {
                 int x = XPosition + 1;
@@ -71,9 +72,11 @@ namespace consoleGame.Pieces
 
                 } while (x < move.XMove && y < move.YMove);
 
+                return true;
+
             }
-
-
+          
+             
             if (move.XMove < XPosition && move.YMove < YPosition)
             {
                 int x = XPosition - 1;
@@ -89,8 +92,9 @@ namespace consoleGame.Pieces
                     y--;
 
                 } while (x > move.XMove && y > move.YMove);
+                return true;
             }
-
+           
 
             if (move.XMove > XPosition && move.YMove < YPosition)
             {
@@ -107,11 +111,13 @@ namespace consoleGame.Pieces
                     y--;
 
                 } while (x < move.XMove && y > move.YMove);
+
+                return true;
             }
+            
 
 
-
-            return true;
+            return false;
         }
     }
 }
