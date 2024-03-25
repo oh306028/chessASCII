@@ -167,6 +167,42 @@ namespace consoleGame.Test
 
 
 
+        [Theory]
+        [InlineData(3, 1)]
+        [InlineData(3, 5)]
+
+
+        public void WhiteBishop_ForInValidAttackMoves_ReturnFalse(int x, int y) 
+        {
+            //init
+
+            var board = Board.InitGrid();
+            board[5, 3] = 'B';
+
+
+            board[3, 1] = 'p';
+            board[3, 5] = 'p';
+            board[4, 2] = 'p';
+            board[4, 4] = 'p';
+
+                
+
+            var pawn = new WhiteBishop(5, 3);
+            var move = new MoveService(x, y);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
+
+
 
     }
 }

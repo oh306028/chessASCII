@@ -122,5 +122,48 @@ namespace consoleGame.Test
             result.Should().Be(false);
         }
 
+
+
+
+
+        [Theory]
+        [InlineData(3, 1)]
+        [InlineData(3, 5)]
+        [InlineData(3, 3)]
+        [InlineData(5, 1)]
+
+
+        public void WhiteQueen_ForInValidAttackMoves_ReturnFalse(int x, int y)  
+        {
+            //init
+
+            var board = Board.InitGrid();
+            board[5, 3] = 'Q';
+
+
+            board[3, 3] = 'p';
+            board[5, 1] = 'p';
+            board[5, 2] = 'p';
+            board[4, 3] = 'p';
+            board[4, 2] = 'p';
+            board[4, 4] = 'p';
+
+
+
+            var pawn = new WhiteQueen(5, 3);
+            var move = new MoveService(x, y);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
     }
 }
+
