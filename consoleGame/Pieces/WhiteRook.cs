@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace consoleGame.Pieces
 {
-    public class WhiteRook : IPiece
+    public class WhiteRook : IPiece, ICastlingPiece
     {
         public char Symbol { get; set; } = 'R';
         public int XPosition { get; set; }
         public int YPosition { get ; set; }
 
         virtual  public AttackService AttackService { get; } = new AttackService('R');
+        public bool HasMoved { get; set; } = false;
 
         public WhiteRook(int x, int y)
         {
@@ -110,21 +111,18 @@ namespace consoleGame.Pieces
 
             if(XPosition == move.XMove)
             {
-                if (CanMovesInCollumns(move, board))    
-                    return true;
+                if (CanMovesInCollumns(move, board)) { HasMoved = true; return true; }
 
             }
 
 
             if (YPosition == move.YMove)
             {
-                if (CanMovesInRows(move, board))    
-                    return true;    
+                if (CanMovesInRows(move, board)) { HasMoved = true; return true; }
 
             }
 
             
-
             return false;
         }
     }

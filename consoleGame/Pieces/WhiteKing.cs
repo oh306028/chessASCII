@@ -42,28 +42,50 @@ namespace consoleGame.Pieces
 
                 if (XPosition == move.XMove && (YPosition + 1 == move.YMove || YPosition - 1 == move.YMove))
                 {
-                    if (ValidMove(move,board)) return true;
+                if (ValidMove(move, board)) { HasMoved = true; return true; }
                 }
                     
 
                 if (YPosition == move.YMove && (XPosition + 1 == move.XMove || XPosition - 1 == move.XMove))
                 {
-                   if (ValidMove(move, board)) return true;
-                }
+                   if (ValidMove(move, board)) { HasMoved = true; return true; }
+            }
 
 
                 if (Math.Abs(XPosition - move.XMove) == 1 && Math.Abs(YPosition - move.YMove) == 1)
                 {
-                    if (ValidMove(move, board)) return true;
-                }
+                    if (ValidMove(move, board)) { HasMoved = true; return true; }
+            }
             
                       
 
-            // for castling method !!
-            //
-            //
-            
-               return false;
+                //castling
+
+                if(board[move.XMove, move.YMove + 1] == 'R')
+                {
+                  var castler = new CastlingService(new WhiteKing(XPosition, YPosition), new WhiteRook(move.XMove, move.YMove + 1), 'K' );
+
+                  castler.GetDestinationIndex(move.YMove + 1);
+
+                    if (castler.CanCastle(board))
+                   { HasMoved = true; return true; }
+
+                }
+
+                if (board[move.XMove, move.YMove - 1] == 'R')
+                {
+
+                 var castler = new CastlingService(new WhiteKing(XPosition, YPosition), new WhiteRook(move.XMove, move.YMove - 1), 'k');
+
+                castler.GetDestinationIndex(move.YMove - 1);
+
+                if (castler.CanCastle(board))
+                  { HasMoved = true; return true; }
+
+                }
+
+
+                return false;
 
         }
 
