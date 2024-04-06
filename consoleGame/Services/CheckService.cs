@@ -118,6 +118,7 @@ namespace consoleGame.Services
 
 
 
+        //for checks
         public bool WhiteCanCheck()
         {
             var kingPos = new KeyValuePair<int, int>();
@@ -181,6 +182,61 @@ namespace consoleGame.Services
             }  
 
             _board[kingPos.Key, kingPos.Value] = 'K';
+            return false;
+
+        }
+
+
+
+        // for castling
+        public bool WhiteCanCheck(int xMove, int yMove)
+        {
+      
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+                    if (WhitePiecesList.Contains(_board[i, j]))
+                    {
+                        var piece = GetCurrentPieceObject(_board[i, j], new KeyValuePair<int, int>(i, j));
+
+                        var gridManager = new GridManager(_board, piece, new MoveService(xMove, yMove));
+
+                        var result = gridManager.CanRewriteBoard();
+
+                        if (result)      
+                            return true;
+                        
+                    }
+                }
+
+            }        
+            return false;
+        }
+
+        public bool BlackCanCheck(int xMove, int yMove)
+        {
+ 
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+                    if (BlackPiecesList.Contains(_board[i, j]))
+                    {
+                        var piece = GetCurrentPieceObject(_board[i, j], new KeyValuePair<int, int>(i, j));
+                            
+                        var gridManager = new GridManager(_board, piece, new MoveService(xMove, yMove));
+
+                        var result = gridManager.CanRewriteBoard();
+
+                        if (result)
+                            return true;
+                        
+                    }
+                }
+
+            }
+        
             return false;
 
         }
