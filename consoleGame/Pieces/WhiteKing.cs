@@ -61,23 +61,24 @@ namespace consoleGame.Pieces
 
                 //castling
 
-                if(board[move.XMove, move.YMove + 1] == 'R')
+                if(board[move.XMove, move.YMove + 1] == 'R' || board[move.XMove, move.YMove - 1] == 'R')
                 {
                   var castler = new CastlingService(new WhiteKing(XPosition, YPosition), new WhiteRook(move.XMove, move.YMove + 1), 'K' );
 
-                  castler.GetDestinationIndex(move.YMove + 1);
+                  castler.GetDestinationIndex(YPosition, move.YMove);
 
                     if (castler.CanCastle(board))
                    { HasMoved = true; return true; }
 
                 }
 
-                if (board[move.XMove, move.YMove - 1] == 'R')
+
+                if (board[move.XMove, move.YMove - 1] == 'r' || board[move.XMove, move.YMove + 1] == 'r')
                 {
 
-                 var castler = new CastlingService(new WhiteKing(XPosition, YPosition), new WhiteRook(move.XMove, move.YMove - 1), 'k');
+                 var castler = new CastlingService(new BlackKing(XPosition, YPosition), new BlackRook(move.XMove, move.YMove - 1), 'k');    
 
-                castler.GetDestinationIndex(move.YMove - 1);
+                castler.GetDestinationIndex(YPosition, move.YMove);
 
                 if (castler.CanCastle(board))
                   { HasMoved = true; return true; }
