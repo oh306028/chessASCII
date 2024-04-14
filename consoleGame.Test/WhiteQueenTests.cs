@@ -164,6 +164,43 @@ namespace consoleGame.Test
 
             result.Should().Be(false);
         }
+
+
+
+
+        [Theory]
+        [InlineData(8, 2)]
+        [InlineData(8, 3)]
+        [InlineData(8, 4)]
+        public void BlackQueen_ForInValidAttackMoves_ReturnFalseSpecialTest(int x, int y)   
+        {
+            //init
+
+            var board = Board.InitGrid();
+
+            board[5, 3] = 'q';
+
+            board[8, 3] = ' ';
+            board[8, 2] = ' ';
+            board[8, 4] = ' ';
+
+
+
+
+            var pawn = new BlackQueen(5, 3);
+            var move = new MoveService(x, y);   
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
     }
 }
 
