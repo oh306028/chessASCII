@@ -83,7 +83,7 @@ namespace consoleGame.Pieces
                         return false;
 
                     i++;
-                } while (i < move.YMove);
+                } while (i < move.XMove);
             }
 
 
