@@ -192,13 +192,27 @@ namespace consoleGame.Services
         public bool WhiteCanCheck(int xMove, int yMove)
         {
       
-            for (int i = 1; i < 9; i++)
+            for (int i = 2; i < 9; i++)
             {
-                for (int j = 1; j < 9; j++)
+                for (int j = 2; j < 9; j++)
                 {
-                    if (WhitePiecesList.Contains(_board[i, j]))
+                    if (WhitePiecesList.Contains(_board[i, j]) && _board[i, j] != 'K')
                     {
                         var piece = GetCurrentPieceObject(_board[i, j], new KeyValuePair<int, int>(i, j));
+
+                        if (piece.Symbol == 'R')
+                            if (piece.YPosition != yMove)
+                                continue;
+
+
+                        if (piece.Symbol == 'N')
+                            if (piece.XPosition > 3)
+                                continue;
+
+
+                        if (_board[i, j] == 'P')
+                            if (piece.XPosition != 2)
+                                continue;
 
                         var gridManager = new GridManager(_board, piece, new MoveService(xMove, yMove));
 
@@ -232,7 +246,7 @@ namespace consoleGame.Services
                         
 
                         if (piece.Symbol == 'n')
-                            if (piece.XPosition == 1)
+                            if (piece.XPosition < 6)
                                 continue;
 
 
