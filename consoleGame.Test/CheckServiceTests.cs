@@ -12,6 +12,29 @@ namespace consoleGame.Test
     public class CheckServiceTests
     {
         [Fact]
+        public void CheckService_ForValidCheckBlackQueen_ReturnsTrue()  
+        {
+            //init
+
+            var board = Board.InitGrid();
+
+
+            board[7, 6] = ' ';
+            board[5, 8] = 'q';
+
+            var checkService = new CheckService(board);
+
+            //act
+
+            var result = checkService.BlackCanCheck();
+
+
+            //assert    
+
+            result.Should().Be(true);
+        }
+
+        [Fact]
         public void CheckService_ForValidCheckBlackRook_ReturnsTrue()
         {
             //init
