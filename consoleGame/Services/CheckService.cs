@@ -217,17 +217,34 @@ namespace consoleGame.Services
         public bool BlackCanCheck(int xMove, int yMove)
         {
  
-            for (int i = 1; i < 9; i++)
+            for (int i = 1; i < 8; i++)
             {
-                for (int j = 1; j < 9; j++)
+                for (int j = 1; j < 8; j++)
                 {
-                    if (BlackPiecesList.Contains(_board[i, j]))
+                    if (BlackPiecesList.Contains(_board[i, j]) && _board[i,j] != 'k')
                     {
                         var piece = GetCurrentPieceObject(_board[i, j], new KeyValuePair<int, int>(i, j));
-                            
+
+
+                        if(piece.Symbol == 'r')                      
+                            if (piece.YPosition != yMove)
+                                continue;
+                        
+
+                        if (piece.Symbol == 'n')
+                            if (piece.XPosition == 1)
+                                continue;
+
+
+                        if (_board[i, j] == 'p')
+                            if (piece.XPosition != 7)
+                                continue;
+
+
                         var gridManager = new GridManager(_board, piece, new MoveService(xMove, yMove));
 
                         var result = gridManager.CanRewriteBoard();
+
 
                         if (result)
                             return true;
@@ -241,5 +258,6 @@ namespace consoleGame.Services
 
         }
 
+     
     }
 }
