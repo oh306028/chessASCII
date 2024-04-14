@@ -13,7 +13,8 @@ namespace consoleGame.Services
         private readonly ICastlingPiece _rook;
         private readonly char _symbol;
 
-        private int Index;
+        private int StartIx;
+        private int EndIx;  
         public CastlingService(ICastlingPiece king, ICastlingPiece rook, char symbol)
         {
             _king = king;
@@ -21,9 +22,10 @@ namespace consoleGame.Services
             _symbol = symbol;
         }
 
-        public void GetDestinationIndex(int index)
+        public void GetDestinationIndex(int startIx,int endIx)  
         {
-            Index = index;  
+            StartIx = startIx;
+            EndIx = endIx;
         }   
 
 
@@ -31,10 +33,24 @@ namespace consoleGame.Services
         {
             var road = new List<int>();
 
-            for(int i = 0; i < Index; i++)
+            if(EndIx > StartIx)
             {
-                road.Add(i);
+
+                for (int i = EndIx; i > StartIx; i--)
+                {
+                    road.Add(i);
+                }
+
             }
+            else
+            {
+                for (int i = EndIx; i < StartIx; i++)
+                {
+                    road.Add(i);
+                }
+
+            }
+
 
             return road;
         }
@@ -45,17 +61,18 @@ namespace consoleGame.Services
         {
             var checker = new CheckService(board);
 
-
             var roadFields = GetRoad();
+
 
             foreach(var field in roadFields)
             {
                 if (checker.BlackCanCheck(8, field))
-                    return false;
+                    return true;
             }
              
-            return true;
+            return false;
         }
+
 
         private bool IsAttackingTheCastlingRoadByWhite(char[,] board)
         {   
@@ -66,10 +83,10 @@ namespace consoleGame.Services
             foreach (var field in roadFields)
             {
                 if (checker.WhiteCanCheck(1, field))
-                    return false;
+                    return true;
             }
 
-            return true;
+            return false;
         }
 
 
