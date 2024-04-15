@@ -13,7 +13,7 @@ namespace consoleGame.Pieces
         public int XPosition { get; set; }
         public int YPosition { get ; set; }
 
-        virtual  public AttackService AttackService { get; } = new AttackService('R');
+        virtual public AttackService AttackService { get; } = new AttackService('R');
         public bool HasMoved { get; set; } = false;
 
         public WhiteRook(int x, int y)
