@@ -101,15 +101,15 @@ namespace consoleGame.Services
                 switch (pieceChar)
                 {
                     case 'P':
-                        return new BlackPawn(position.Key, position.Value);
+                        return new WhitePawn(position.Key, position.Value);
                     case 'R':
-                        return new BlackRook(position.Key, position.Value);
+                        return new WhiteRook(position.Key, position.Value);
                     case 'N':
-                        return new BlackKnight(position.Key, position.Value);
+                        return new WhiteKnight(position.Key, position.Value);
                     case 'Q':
-                        return new BlackQueen(position.Key, position.Value);
+                        return new WhiteQueen(position.Key, position.Value);
                     case 'B':
-                        return new BlackBishop(position.Key, position.Value);
+                        return new WhiteBishop(position.Key, position.Value);
                 }
             }
 
@@ -194,7 +194,7 @@ namespace consoleGame.Services
       
             for (int i = 2; i < 9; i++)
             {
-                for (int j = 2; j < 9; j++)
+                for (int j = 1; j < 9; j++)
                 {
                     if (WhitePiecesList.Contains(_board[i, j]) && _board[i, j] != 'K')
                     {

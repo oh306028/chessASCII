@@ -250,5 +250,151 @@ namespace consoleGame.Test
         }
 
 
+
+        [Theory]
+        [InlineData(5, 2)]
+        [InlineData(5, 3)]
+        [InlineData(5, 4)]
+        [InlineData(6, 2)]
+        [InlineData(6, 3)]
+
+        public void CastlingService_ForBlackInValidCastle_ReturnsFalse(int x, int y)    
+        {
+            //init
+            var board = Board.InitGrid();
+
+
+            board[1, 3] = ' ';
+            board[1, 2] = ' ';
+            board[1, 4] = ' ';
+
+            board[2, 3] = ' ';
+            board[2, 2] = ' ';
+            board[2, 4] = ' ';
+
+
+            board[x, y] = 'Q';
+
+
+            var pawn = new BlackKing(1, 5);
+            var move = new MoveService(1, 2);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
+
+
+
+
+        [Theory]
+        [InlineData(5, 2)]
+        [InlineData(5, 3)]
+        [InlineData(5, 4)]
+        [InlineData(6, 2)]
+        [InlineData(6, 3)]
+
+        public void CastlingService_ForBlackValidCastle_ReturnsTrue(int x, int y) 
+        {   
+            //init
+            var board = Board.InitGrid();
+
+
+            board[1, 3] = ' ';
+            board[1, 2] = ' ';
+            board[1, 4] = ' ';
+
+
+
+            board[x, y] = 'Q';
+
+
+            var pawn = new BlackKing(1, 5);
+            var move = new MoveService(1, 2);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(true);
+        }
+
+        [Fact]
+        public void CastlingService_ForBlackInValidCastle_ReturnsFalse2()       
+        {
+            //init
+            var board = Board.InitGrid();
+
+
+            board[1, 3] = ' ';
+            board[1, 2] = ' ';
+            board[1, 4] = ' ';
+
+            board[2, 2] = 'P';
+
+
+
+            var pawn = new BlackKing(1, 5);
+            var move = new MoveService(1, 2);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
+
+
+        [Theory]
+        [InlineData(4, 1)]
+        [InlineData(5, 6)]
+
+        public void CastlingService_ForBlackInValidCastle_ReturnsFalse5(int x, int y)   
+        {
+            //init
+            var board = Board.InitGrid();
+
+
+            board[1, 3] = ' ';
+            board[1, 2] = ' ';
+            board[1, 4] = ' ';
+
+            board[2, 3] = ' ';
+            board[2, 2] = ' ';
+            board[2, 4] = ' ';
+
+
+            board[x, y] = 'B';
+
+
+            var pawn = new BlackKing(1, 5);
+            var move = new MoveService(1, 2);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(false);
+        }
+
+
     }
 }
