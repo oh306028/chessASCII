@@ -69,6 +69,59 @@ namespace consoleGame.Test
             result.Should().Be(true);
         }
 
+        [Fact]
+        public void CastlingService_ForValidrightCastle_ReturnsTrue()   
+        {
+            //init
+            var board = Board.InitGrid();
+
+
+            board[8, 6] = ' ';
+            board[8, 7] = ' ';
+
+            board[6, 4] = 'q';
+
+
+            var pawn = new WhiteKing(8, 5);
+            var move = new MoveService(8, 7);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(true);
+        }
+
+        [Fact]
+        public void CastlingService_ForValidrighWhitetCastle_ReturnsTrue()  
+        {
+            //init
+            var board = Board.InitGrid();
+
+
+            board[1, 6] = ' ';
+            board[1, 7] = ' ';
+
+
+            var pawn = new BlackKing(1, 5); 
+            var move = new MoveService(1, 7);
+            var gridMan = new GridManager(board, pawn, move);
+
+            //act
+
+            var result = gridMan.CanRewriteBoard();
+
+
+            //assert
+
+            result.Should().Be(true);
+        }
+
+
 
         [Theory]
         [InlineData(5, 3)]
